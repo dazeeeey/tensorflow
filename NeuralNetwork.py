@@ -40,17 +40,19 @@ def get_accuracy(predict, Y):
 
 class My_nn:
 	def __init__(self):
-		self.W1 = np.random.rand(?, ?) - 0.5
-		self.b1 = np.random.rand(?, ?) - 0.5
-		self.W2 = np.random.rand(?, ?) - 0.5
-		self.b2 = np.random.rand(?, ?) - 0.5
+		self.W1 = np.random.rand(10, 784) - 0.5
+		self.b1 = np.random.rand(10, 1) - 0.5
+		self.W2 = np.random.rand(10, 10) - 0.5
+		self.b2 = np.random.rand(10, 1) - 0.5
 	
 	def forward_prop(self, X):
 		Z1 = np.dot(self.W1, X) + self.b1
-		A1 = ?
+		A1 = relu(Z1)
 		Z2 = np.dot(self.W2, A1) + self.b2
-		A2 = ?	
-		return Z1, A1, Z2, A2
+		A2 = relu(Z2)
+		Z3 = np.dot(self.W2,A2)
+		A3 = softmax(Z3)
+		return Z1, A1, Z2, A2 , A3 ,Z3
 	
 	def back_prop(self, Z1, A1, Z2, A2, X, Y, alpha):
 		m = len(Y)
