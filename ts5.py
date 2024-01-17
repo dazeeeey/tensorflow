@@ -20,7 +20,7 @@ class MLP():
                 x = self.activion[i // 2](x)
         return x 
     def fit(self ,X,Y,lr=0.0001,epochs=2000):
-        for epoch in range(epoch):
+        for epoch in range(epochs):
             with tf.GradientTape() as t:
                 loss = tf.reduce_mean((self(X)-Y)**2)
             dw = t.gradient(loss , self.W)
@@ -50,11 +50,11 @@ for c in classes:
     sp = int(spilt * len(idx))
     itrain.extend(idx[:sp])
     itest.extend(idx[sp:])
-    Y.append(Idx.astype(np.int)) #one hot     
+    Y.append(Idx.astype(np.int32)) #one hot     
 Y = np.array(Y).T
 
 model = MLP([4,100,50,3],[tf.sigmoid , tf.sigmoid, tf.sigmoid])
-model.fit(X[itrain], Y[itrain], Ir=0.1,epochs=5000)
+model.fit(X[itrain], Y[itrain], lr=0.1,epochs=5000)
 
 Z = model(X[itest])
 tf.argmax(Z, axis=1)
